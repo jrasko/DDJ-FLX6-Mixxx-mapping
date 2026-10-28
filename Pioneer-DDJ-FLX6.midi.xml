@@ -3,8 +3,8 @@
     <info>
         <name>Pioneer DDJ-FLX6</name>
         <author>Robert904</author>
-        <description>Midi Mapping for the Pioneer DDJ-FLX4 (based on DDJ-400 mapping)</description>
-        <forums>https://mixxx.discourse.group/t/pioneer-ddj-flx4</forums>
+        <description>Midi Mapping for the Pioneer DDJ-FLX6 (based on the DDJ-FLX4 mapping)</description>
+        <forums>https://mixxx.discourse.group/t/ddj-flx6-and-mixxx/24714</forums>
     </info>
     <settings>
         <group label="MERGE FX knobs">
