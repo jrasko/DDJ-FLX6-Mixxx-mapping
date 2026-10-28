@@ -28,7 +28,6 @@
 //                ON/OFF toggles focused effect slot
 //                SHIFT + ON/OFF disables all three effect slots.
 //
-//      * 32 beat jump forward & back (Shift + </> CUE/LOOP CALL arrows)
 //      * Toggle quantize (Shift + channel cue)
 //
 //  Not implemented (after discussion and trial attempts):
@@ -310,8 +309,6 @@ PioneerDDJFLX6.beatjumpSizeForPad = {
     0x26: -8, // PAD 7
     0x27: 8   // PAD 8
 };
-
-PioneerDDJFLX6.quickJumpSize = 32;
 
 // Used for tempo slider
 PioneerDDJFLX6.highResMSB = {
@@ -1552,18 +1549,6 @@ PioneerDDJFLX6.sortPressed = function(_channel, _control, value, _status, group)
 PioneerDDJFLX6.toggleQuantize = function(_channel, _control, value, _status, group) {
     if (value) {
         script.toggleControl(group, "quantize");
-    }
-};
-
-PioneerDDJFLX6.quickJumpForward = function(_channel, _control, value, _status, group) {
-    if (value) {
-        engine.setValue(group, "beatjump", PioneerDDJFLX6.quickJumpSize);
-    }
-};
-
-PioneerDDJFLX6.quickJumpBack = function(_channel, _control, value, _status, group) {
-    if (value) {
-        engine.setValue(group, "beatjump", -PioneerDDJFLX6.quickJumpSize);
     }
 };
 
