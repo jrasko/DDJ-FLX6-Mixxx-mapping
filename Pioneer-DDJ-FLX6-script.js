@@ -77,7 +77,7 @@ PioneerDDJFLX6.lights = {
     },
     deck2: {
         vuMeter: {
-            status: 0xB0,
+            status: 0xB1,
             data1: 0x02,
         },
         playPause: {
