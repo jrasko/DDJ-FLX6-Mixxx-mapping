@@ -460,6 +460,28 @@ PioneerDDJFLX6.init = function() {
 };
 
 //
+// Browser
+//
+// Sidebar = 2 in [Library] focused_widget.
+// GoToItem expands/collapses a selected parent item (e.g. the crate list) and
+// moves to the track list when a leaf item is selected.
+//
+
+PioneerDDJFLX6.sidebarFocused = function() {
+    return engine.getValue("[Library]", "focused_widget") === 2;
+};
+
+PioneerDDJFLX6.browsePressed = function(_channel, _control, value) {
+    if (value === 0) { return; }
+
+    if (PioneerDDJFLX6.sidebarFocused()) {
+        script.triggerControl("[Library]", "GoToItem", 100);
+    } else {
+        script.triggerControl("[Library]", "MoveFocusBackward", 100);
+    }
+};
+
+//
 // Waveform zoom
 //
 

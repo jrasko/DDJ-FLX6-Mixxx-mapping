@@ -3777,12 +3777,12 @@
             </control>
             <control>
                 <group>[Library]</group>
-                <key>MoveFocusForward</key>
-                <description>BROWSE - press - Move cursor between track list and tree view</description>
+                <key>PioneerDDJFLX6.browsePressed</key>
+                <description>BROWSE - press - Expand/collapse the selected sidebar item or enter the track list; from the track list go back to the sidebar</description>
                 <status>0x96</status>
                 <midino>0x41</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -3819,16 +3819,6 @@
                 <midino>0x41</midino>
                 <options>
                     <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Library]</group>
-                <key>MoveFocusBackward</key>
-                <description>BROWSE +SHIFT - press - Move cursor between track list and tree view</description>
-                <status>0x96</status>
-                <midino>0x42</midino>
-                <options>
-                    <normal/>
                 </options>
             </control>
             <control>
@@ -5703,6 +5693,16 @@
                 <midino>0x61</midino>
                 <options>
                     <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Library]</group>
+                <key>MoveFocusBackward</key>
+                <description>BACK - press - Move cursor between track list and sidebar</description>
+                <status>0x96</status>
+                <midino>0x65</midino>
+                <options>
+                    <normal/>
                 </options>
             </control>
         </controls>
