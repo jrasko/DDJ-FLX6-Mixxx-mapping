@@ -5665,6 +5665,46 @@
                     <script-binding/>
                 </options>
             </control>
+            <control>
+                <group>[Library];sort_column_toggle;15</group>
+                <key>PioneerDDJFLX6.sortPressed</key>
+                <description>LOAD +SHIFT BPM (DECK1) - press - Sort library by BPM (press again to reverse)</description>
+                <status>0x96</status>
+                <midino>0x58</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Library];sort_column_toggle;2</group>
+                <key>PioneerDDJFLX6.sortPressed</key>
+                <description>LOAD +SHIFT title (DECK2) - press - Sort library by title (press again to reverse)</description>
+                <status>0x96</status>
+                <midino>0x59</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Library];sort_column_toggle;20</group>
+                <key>PioneerDDJFLX6.sortPressed</key>
+                <description>LOAD +SHIFT key (DECK3) - press - Sort library by key (press again to reverse)</description>
+                <status>0x96</status>
+                <midino>0x60</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Library];sort_column_toggle;1</group>
+                <key>PioneerDDJFLX6.sortPressed</key>
+                <description>LOAD +SHIFT artist (DECK4) - press - Sort library by artist (press again to reverse)</description>
+                <status>0x96</status>
+                <midino>0x61</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
         </controls>
         <outputs>
             <output>

@@ -1519,6 +1519,14 @@ PioneerDDJFLX6.viewPressed = function(_channel, _control, value, _status, group)
     }
 };
 
+PioneerDDJFLX6.sortPressed = function(_channel, _control, value, _status, group) {
+    if (value === 0) { return; }
+
+    const groupKeyValue = group.split(";");
+    if (groupKeyValue.length < 3) { return; }
+    engine.setValue(groupKeyValue[0], groupKeyValue[1], parseInt(groupKeyValue[2]));
+};
+
 PioneerDDJFLX6.toggleQuantize = function(_channel, _control, value, _status, group) {
     if (value) {
         script.toggleControl(group, "quantize");
