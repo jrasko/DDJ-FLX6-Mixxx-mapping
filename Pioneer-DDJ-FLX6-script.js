@@ -74,38 +74,6 @@ PioneerDDJFLX6.lights = {
             status: 0x90,
             data1: 0x48,
         },
-        hotcueMode: {
-            status: 0x90,
-            data1: 0x1B,
-        },
-        keyboardMode: {
-            status: 0x90,
-            data1: 0x69,
-        },
-        padFX1Mode: {
-            status: 0x90,
-            data1: 0x1E,
-        },
-        padFX2Mode: {
-            status: 0x90,
-            data1: 0x6B,
-        },
-        beatJumpMode: {
-            status: 0x90,
-            data1: 0x20,
-        },
-        beatLoopMode: {
-            status: 0x90,
-            data1: 0x6D,
-        },
-        samplerMode: {
-            status: 0x90,
-            data1: 0x22,
-        },
-        keyShiftMode: {
-            status: 0x90,
-            data1: 0x6F,
-        },
     },
     deck2: {
         vuMeter: {
@@ -128,145 +96,17 @@ PioneerDDJFLX6.lights = {
             status: 0x91,
             data1: 0x48,
         },
-        hotcueMode: {
-            status: 0x91,
-            data1: 0x1B,
-        },
-        keyboardMode: {
-            status: 0x91,
-            data1: 0x69,
-        },
-        padFX1Mode: {
-            status: 0x91,
-            data1: 0x1E,
-        },
-        padFX2Mode: {
-            status: 0x91,
-            data1: 0x6B,
-        },
-        beatJumpMode: {
-            status: 0x91,
-            data1: 0x20,
-        },
-        beatLoopMode: {
-            status: 0x91,
-            data1: 0x6D,
-        },
-        samplerMode: {
-            status: 0x91,
-            data1: 0x22,
-        },
-        keyShiftMode: {
-            status: 0x91,
-            data1: 0x6F,
-        },
     },
 	deck3: {
         vuMeter: {
             status: 0xB2,
             data1: 0x02,
         },
-        playPause: {
-            status: 0xB2,
-            data1: 0x0B,
-        },
-        shiftPlayPause: {
-            status: 0xB2,
-            data1: 0x47,
-        },
-        cue: {
-            status: 0xB2,
-            data1: 0x0C,
-        },
-        shiftCue: {
-            status: 0xB2,
-            data1: 0x48,
-        },
-        hotcueMode: {
-            status: 0xB2,
-            data1: 0x1B,
-        },
-        keyboardMode: {
-            status: 0xB2,
-            data1: 0x69,
-        },
-        padFX1Mode: {
-            status: 0xB2,
-            data1: 0x1E,
-        },
-        padFX2Mode: {
-            status: 0xB2,
-            data1: 0x6B,
-        },
-        beatJumpMode: {
-            status: 0xB2,
-            data1: 0x20,
-        },
-        beatLoopMode: {
-            status: 0xB2,
-            data1: 0x6D,
-        },
-        samplerMode: {
-            status: 0xB2,
-            data1: 0x22,
-        },
-        keyShiftMode: {
-            status: 0xB2,
-            data1: 0x6F,
-        },
     },
     deck4: {
         vuMeter: {
             status: 0xB3,
             data1: 0x02,
-        },
-        playPause: {
-            status: 0xB3,
-            data1: 0x0B,
-        },
-        shiftPlayPause: {
-            status: 0xB3,
-            data1: 0x47,
-        },
-        cue: {
-            status: 0xB3,
-            data1: 0x0C,
-        },
-        shiftCue: {
-            status: 0xB3,
-            data1: 0x48,
-        },
-        hotcueMode: {
-            status: 0xB3,
-            data1: 0x1B,
-        },
-        keyboardMode: {
-            status: 0xB3,
-            data1: 0x69,
-        },
-        padFX1Mode: {
-            status: 0xB3,
-            data1: 0x1E,
-        },
-        padFX2Mode: {
-            status: 0xB3,
-            data1: 0x6B,
-        },
-        beatJumpMode: {
-            status: 0xB3,
-            data1: 0x20,
-        },
-        beatLoopMode: {
-            status: 0xB3,
-            data1: 0x6D,
-        },
-        samplerMode: {
-            status: 0xB3,
-            data1: 0x22,
-        },
-        keyShiftMode: {
-            status: 0xB3,
-            data1: 0x6F,
         },
     },
 };
@@ -1421,46 +1261,6 @@ PioneerDDJFLX6.samplerPlayOutputCallbackFunction = function(value, group, _contr
             0x97 + deckIndex,
             0x30 + padIndex,
             group);
-    }
-};
-
-PioneerDDJFLX6.padModeKeyPressed = function(_channel, _control, value, _status, _group) {
-    let deck;
-
-	switch (_status) {
-		case 0x90:
-			deck = PioneerDDJFLX6.lights.deck1;
-			break;
-		case 0x91:
-			deck = PioneerDDJFLX6.lights.deck2;
-			break;
-		case 0x92:
-			deck = PioneerDDJFLX6.lights.deck3;
-			break;
-		case 0x93:
-			deck = PioneerDDJFLX6.lights.deck4;
-			break;
-		default:
-			console.error("Unknown status: " + _status);
-			return;
-	}
-
-    if (_control === 0x1B) {
-        PioneerDDJFLX6.toggleLight(deck.hotcueMode, true);
-    } else if (_control === 0x69) {
-        PioneerDDJFLX6.toggleLight(deck.keyboardMode, true);
-    } else if (_control === 0x1E) {
-        PioneerDDJFLX6.toggleLight(deck.padFX1Mode, true);
-    } else if (_control === 0x6B) {
-        PioneerDDJFLX6.toggleLight(deck.padFX2Mode, true);
-    } else if (_control === 0x20) {
-        PioneerDDJFLX6.toggleLight(deck.beatJumpMode, true);
-    } else if (_control === 0x6D) {
-        PioneerDDJFLX6.toggleLight(deck.beatLoopMode, true);
-    } else if (_control === 0x22) {
-        PioneerDDJFLX6.toggleLight(deck.samplerMode, true);
-    } else if (_control === 0x6F) {
-        PioneerDDJFLX6.toggleLight(deck.keyShiftMode, true);
     }
 };
 
