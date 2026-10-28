@@ -28,7 +28,7 @@
 //                ON/OFF toggles focused effect slot
 //                SHIFT + ON/OFF disables all three effect slots.
 //
-//      * Toggle quantize (Shift + channel cue)
+//      * Toggle quantize (Shift + Beat Sync)
 //
 //  Not implemented (after discussion and trial attempts):
 //      * Loop Section:
@@ -734,27 +734,6 @@ PioneerDDJFLX6.cueLoopCallRight = function(_channel, _control, value, _status, g
     }
 };
 
-//
-// BEAT SYNC
-//
-// Note that the controller sends different signals for a short press and a long
-// press of the same button.
-//
-
-PioneerDDJFLX6.syncPressed = function(channel, control, value, status, group) {
-    if (engine.getValue(group, "sync_enabled") && value > 0) {
-        engine.setValue(group, "sync_enabled", 0);
-    } else {
-        engine.setValue(group, "beatsync", value);
-    }
-};
-
-PioneerDDJFLX6.syncLongPressed = function(channel, control, value, status, group) {
-    if (value) {
-        engine.setValue(group, "sync_enabled", 1);
-    }
-};
-
 PioneerDDJFLX6.cycleTempoRange = function(_channel, _control, value, _status, group) {
     if (value === 0) { return; } // ignore release
 
@@ -1344,12 +1323,6 @@ PioneerDDJFLX6.sortPressed = function(_channel, _control, value, _status, group)
     const groupKeyValue = group.split(";");
     if (groupKeyValue.length < 3) { return; }
     engine.setValue(groupKeyValue[0], groupKeyValue[1], parseInt(groupKeyValue[2]));
-};
-
-PioneerDDJFLX6.toggleQuantize = function(_channel, _control, value, _status, group) {
-    if (value) {
-        script.toggleControl(group, "quantize");
-    }
 };
 
 //
