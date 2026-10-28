@@ -5655,6 +5655,16 @@
                     <normal/>
                 </options>
             </control>
+            <control>
+                <group>[Skin]</group>
+                <key>PioneerDDJFLX6.viewPressed</key>
+                <description>VIEW - press - Toggle maximized library</description>
+                <status>0x96</status>
+                <midino>0x7A</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
         </controls>
         <outputs>
             <output>

@@ -1513,6 +1513,12 @@ PioneerDDJFLX6.stopLEDBlink = function(channel, control) {
 };
 
 
+PioneerDDJFLX6.viewPressed = function(_channel, _control, value, _status, group) {
+    if (value) {
+        script.toggleControl(group, "show_maximized_library");
+    }
+};
+
 PioneerDDJFLX6.toggleQuantize = function(_channel, _control, value, _status, group) {
     if (value) {
         script.toggleControl(group, "quantize");
