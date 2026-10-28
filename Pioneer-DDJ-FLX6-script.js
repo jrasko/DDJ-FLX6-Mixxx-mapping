@@ -278,7 +278,7 @@ PioneerDDJFLX6.init = function() {
     engine.makeConnection("[Channel4]", "loop_enabled", PioneerDDJFLX6.loopToggle);
 
     
-    for (i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 3; i++) {
         engine.makeConnection("[EffectRack1_EffectUnit1_Effect" + i +"]", "enabled", PioneerDDJFLX6.toggleFxLight);
         engine.makeConnection("[EffectRack1_EffectUnit2_Effect" + i +"]", "enabled", PioneerDDJFLX6.toggleFxLight);
     }
@@ -1376,7 +1376,4 @@ PioneerDDJFLX6.shutdown = function() {
     // stop any flashing lights
     PioneerDDJFLX6.toggleLight(PioneerDDJFLX6.lights.beatFx, false);
     PioneerDDJFLX6.toggleLight(PioneerDDJFLX6.lights.shiftBeatFx, false);
-
-    // stop the keepalive timer
-    engine.stopTimer(PioneerDDJFLX6.keepAliveTimer);
 };
