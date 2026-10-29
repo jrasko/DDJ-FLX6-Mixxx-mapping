@@ -12,7 +12,7 @@ The controller's manual has no MIDI table. MIDI notes were taken from the FLX4 m
 ## What is mapped
 - **Mixer:** trim, 3-band EQ, filter (Quick Effect `super1`), channel faders, crossfader, headphone CUE per channel, headphone mix, VU meters.
 - **Transport and tempo:** play, cue, shift+cue, sync, master (sync leader), 14-bit tempo slider. Shift+master cycles the tempo range, shift+Beat Sync toggles quantize, shift+headphone CUE is tap tempo.
-- **Jog wheel:** touch, scratch, bend, shift+search. Shift+IN and shift+OUT adjust the loop points with the jog wheel; the lights show which point is being adjusted. A plain IN/OUT press during a loop sets new loop points, which differs from the manual.
+- **Jog wheel:** touch, scratch, bend, shift+search. If you lift your hand while the wheel is still moving (a back spin), scratching continues until the wheel has stopped. Shift+IN and shift+OUT adjust the loop points with the jog wheel; the lights show which point is being adjusted. A plain IN/OUT press during a loop sets new loop points, which differs from the manual.
 - **Loops:** IN, OUT, reloop/exit, loop halve/double.
 - **Pads:** Hot Cue (shift to clear), Beat Jump (shift to resize), Beat Loop, Sampler (shift to stop/eject, pads blink while a sample plays), Keyboard mode, Key Shift. Pad FX pads 1-8 trigger Quick Effect presets.
 - **Browser:** rotary turn, rotary press (expands or collapses sidebar items and enters the track list; from the track list it moves back to the sidebar), BACK (moves focus backward), LOAD on all four decks, shift+LOAD sorting (deck 1 BPM, deck 2 title, deck 3 key, deck 4 artist), VIEW (maximized library), shift+rotary waveform zoom.
@@ -39,7 +39,7 @@ Mixxx has no Merge FX, Release FX or Serato/rekordbox-only features, so these co
 | Shift + BEAT FX ON/OFF (Release FX)         | Spinback of the playing decks assigned to effect unit 1; releasing cancels it           | Turns Release FX on/off (rekordbox)                |
 
 ## Not mapped
-- JOG CUTTER (Jog Cutter mode) and shift+JOG CUTTER (Vinyl mode toggle). The controller switches Vinyl mode itself: with it on, touching the top of the platter scratches; with it off, the platter only bends the pitch. The mapping needs no binding for it, and no light shows the mode.
+- JOG CUTTER (Jog Cutter mode).
 - Pad shift layers: Pad FX effects I-P, Keyboard mode shift (delete cue, semitone up/down) and Key Shift pad 7/8 (change pitch step).
 - Beat FX: the beat-fraction buttons and shift+BEAT (Auto/Tap mode), which step the effect selector instead.
 - Merge FX shift functions as described in the manual (shift+press to cancel, shift+turn for sample volume); the same inputs are used for the Mixxx-specific pitch controls above.
@@ -51,5 +51,6 @@ Mixxx has no Merge FX, Release FX or Serato/rekordbox-only features, so these co
 These work without any binding in the mapping:
 - Shift+DECK SELECT (Dual Deck). The messages it sends in Dual Deck mode are not checked, so the Merge FX deck tracking may not follow it.
 - Double-press LOAD (Instant Doubles). It presumably loads the same selected library track onto the second deck; whether it also copies the playback position, as Mixxx's `CloneFromDeck` would, is not checked.
+- Vinyl mode (shift+JOG CUTTER). The controller switches it itself: with it on, touching the top of the platter scratches; with it off, the platter only bends the pitch. No light shows the mode.
 - Master headphone CUE, probably because the FLX6 has a built-in audio interface and routes it itself.
 - Lighting of the pad mode buttons (HOT CUE, PAD FX, BEAT JUMP, SAMPLER, KEYBOARD, KEY SHIFT, …) on all decks. The pad LEDs themselves (hot cue, beat loop and sampler state) are driven by the mapping.
