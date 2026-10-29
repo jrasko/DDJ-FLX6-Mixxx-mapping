@@ -552,12 +552,6 @@ PioneerDDJFLX6.toggleLoopAdjustOut = function(channel, _control, value, _status,
     PioneerDDJFLX6.loopAdjustIn[channel] = false;
 };
 
-// Two signals are sent here so that the light stays lit/unlit in its shift state too
-PioneerDDJFLX6.setReloopLight = function(status, value) {
-    midi.sendShortMsg(status, 0x4D, value);
-    midi.sendShortMsg(status, 0x50, value);
-};
-
 
 PioneerDDJFLX6.setLoopButtonLights = function(status, value) {
     [0x10, 0x11, 0x4E, 0x4C].forEach(function(control) {
@@ -630,8 +624,6 @@ PioneerDDJFLX6.loopToggle = function(value, group, control) {
             console.error("Unknown group: " + group);
             return; // Exit if group doesn't match any case
     }
-
-    PioneerDDJFLX6.setReloopLight(status, value ? 0x7F : 0x00);
 
     if (value) {
         PioneerDDJFLX6.startLoopLightsBlink(channel, control, status, group);
@@ -1278,11 +1270,6 @@ PioneerDDJFLX6.shutdown = function() {
     PioneerDDJFLX6.setLoopButtonLights(0x91, 0x00);
     PioneerDDJFLX6.setLoopButtonLights(0x92, 0x00);
     PioneerDDJFLX6.setLoopButtonLights(0x93, 0x00);
-    // turn off reloop lights
-    PioneerDDJFLX6.setReloopLight(0x90, 0x00);
-    PioneerDDJFLX6.setReloopLight(0x91, 0x00);
-	PioneerDDJFLX6.setReloopLight(0x92, 0x00);
-    PioneerDDJFLX6.setReloopLight(0x93, 0x00);
 
     // turn off jogwheel lights
     midi.sendShortMsg(0xBB, 0x00, 0x00);
