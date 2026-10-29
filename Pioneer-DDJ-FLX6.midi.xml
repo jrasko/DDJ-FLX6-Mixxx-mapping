@@ -307,12 +307,12 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect1]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 322 messages.</description>
+                <key>PioneerDDJFLX6.beatFxKnobMSB</key>
+                <description>BEAT FX LEVEL/DEPTH (slot 1) - turn - meta, with SHIFT mix (MSB)</description>
                 <status>0xB4</status>
                 <midino>0x02</midino>
                 <options>
-                    <fourteen-bit-msb/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -527,12 +527,12 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect2]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 236 messages.</description>
+                <key>PioneerDDJFLX6.beatFxKnobMSB</key>
+                <description>BEAT FX LEVEL/DEPTH (slot 2) - turn - meta, with SHIFT mix (MSB)</description>
                 <status>0xB4</status>
                 <midino>0x04</midino>
                 <options>
-                    <fourteen-bit-msb/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -727,12 +727,12 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect3]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 224 messages.</description>
+                <key>PioneerDDJFLX6.beatFxKnobMSB</key>
+                <description>BEAT FX LEVEL/DEPTH (slot 3) - turn - meta, with SHIFT mix (MSB)</description>
                 <status>0xB4</status>
                 <midino>0x06</midino>
                 <options>
-                    <fourteen-bit-msb/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -1949,12 +1949,12 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect1]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 322 messages.</description>
+                <key>PioneerDDJFLX6.beatFxKnobLSB</key>
+                <description>BEAT FX LEVEL/DEPTH (slot 1) - turn - meta, with SHIFT mix (LSB)</description>
                 <status>0xB4</status>
                 <midino>0x22</midino>
                 <options>
-                    <fourteen-bit-lsb/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -2129,12 +2129,12 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect2]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 236 messages.</description>
+                <key>PioneerDDJFLX6.beatFxKnobLSB</key>
+                <description>BEAT FX LEVEL/DEPTH (slot 2) - turn - meta, with SHIFT mix (LSB)</description>
                 <status>0xB4</status>
                 <midino>0x24</midino>
                 <options>
-                    <fourteen-bit-lsb/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -2273,12 +2273,12 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect3]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 224 messages.</description>
+                <key>PioneerDDJFLX6.beatFxKnobLSB</key>
+                <description>BEAT FX LEVEL/DEPTH (slot 3) - turn - meta, with SHIFT mix (LSB)</description>
                 <status>0xB4</status>
                 <midino>0x26</midino>
                 <options>
-                    <fourteen-bit-lsb/>
+                    <script-binding/>
                 </options>
             </control>
             <control>

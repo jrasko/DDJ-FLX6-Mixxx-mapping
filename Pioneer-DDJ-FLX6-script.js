@@ -514,13 +514,29 @@ PioneerDDJFLX6.focusedFxGroup = function() {
     return "[EffectRack1_EffectUnit1_Effect" + focusedFx + "]";
 };
 
-PioneerDDJFLX6.beatFxLevelDepthRotate = function(_channel, _control, value) {
-    if (PioneerDDJFLX6.shiftButtonDown[0] || PioneerDDJFLX6.shiftButtonDown[1] || PioneerDDJFLX6.shiftButtonDown[2] || PioneerDDJFLX6.shiftButtonDown[3]) {
-        engine.softTakeoverIgnoreNextValue("[EffectRack1_EffectUnit1]", "mix");
-        engine.setParameter(PioneerDDJFLX6.focusedFxGroup(), "meta", value / 0x7F);
+//
+// BEAT FX LEVEL/DEPTH knob
+//
+// Every Beat FX slot has its own 14-bit CC pair (MSB 0xB4 0x02/0x04/0x06,
+// LSB = MSB + 0x20). The group of each binding is the slot's effect.
+// Without SHIFT the knob sets the meta (depth) of the slot's effect, with SHIFT
+// it sets the mix (level) of the effect unit.
+//
+
+PioneerDDJFLX6.beatFxKnobHigh = {};
+
+PioneerDDJFLX6.beatFxKnobMSB = function(_channel, _control, value, _status, group) {
+    PioneerDDJFLX6.beatFxKnobHigh[group] = value;
+};
+
+PioneerDDJFLX6.beatFxKnobLSB = function(_channel, _control, value, _status, group) {
+    const fullValue = ((PioneerDDJFLX6.beatFxKnobHigh[group] || 0) << 7) + value;
+    const shiftDown = PioneerDDJFLX6.shiftButtonDown.some(function(down) { return down; });
+
+    if (shiftDown) {
+        engine.setParameter("[EffectRack1_EffectUnit1]", "mix", fullValue / 0x3FFF);
     } else {
-        engine.softTakeoverIgnoreNextValue(PioneerDDJFLX6.focusedFxGroup(), "meta");
-        engine.setParameter("[EffectRack1_EffectUnit1]", "mix", value / 0x7F);
+        engine.setParameter(group, "meta", fullValue / 0x3FFF);
     }
 };
 
