@@ -1219,27 +1219,31 @@ PioneerDDJFLX6.decreaseBeatjumpSizes = function(_channel, control, value, _statu
 PioneerDDJFLX6.samplerPlayOutputCallbackFunction = function(value, group, _control) {
     if (value === 1) {
         const curPad = group.match(script.samplerRegEx)[1];
-        let deckIndex = 0;
+        // Samplers 1-4 and 9-12 are on the left pads (decks 1 and 3),
+        // samplers 5-8 and 13-16 on the right pads (decks 2 and 4).
+        let padStatuses = [0x97, 0x9B];
         let padIndex = 0;
 
         if (curPad >=1 && curPad <= 4) {
-            deckIndex = 0;
+            padStatuses = [0x97, 0x9B];
             padIndex = curPad - 1;
         } else if (curPad >=5 && curPad <= 8) {
-            deckIndex = 2;
+            padStatuses = [0x99, 0x9D];
             padIndex = curPad - 5;
         } else if (curPad >=9 && curPad <= 12) {
-            deckIndex = 0;
+            padStatuses = [0x97, 0x9B];
             padIndex = curPad - 5;
         } else if (curPad >=13 && curPad <= 16) {
-            deckIndex = 2;
+            padStatuses = [0x99, 0x9D];
             padIndex = curPad - 9;
         }
 
-        PioneerDDJFLX6.startSamplerBlink(
-            0x97 + deckIndex,
-            0x30 + padIndex,
-            group);
+        padStatuses.forEach(function(padStatus) {
+            PioneerDDJFLX6.startSamplerBlink(
+                padStatus,
+                0x30 + padIndex,
+                group);
+        });
     }
 };
 
