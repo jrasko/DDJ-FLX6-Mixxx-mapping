@@ -36,11 +36,12 @@ Mixxx has no Merge FX, Release FX or Serato/rekordbox-only features, so these co
 | BEAT ◄ / ►                                  | Steps the Beat FX effect selector                                                       | Beat fraction down / up                            |
 | Beat FX slots and channel select            | Three slots on `EffectUnit1`/`EffectUnit2`, routed to channels                          | Beat FX slot and channel select                    |
 | Beat FX LEVEL/DEPTH knob (per slot)         | Turn: `meta` (depth) of the slot's effect; shift + turn: `mix` (level) of effect unit 1 | Adjusts the Beat FX parameter (shift does nothing) |
+| Shift + BEAT FX ON/OFF (Release FX)         | Spinback of the playing decks assigned to effect unit 1; releasing cancels it           | Turns Release FX on/off (rekordbox)                |
 
 ## Not mapped
 - Shift+JOG CUTTER (Vinyl mode toggle); `vinylMode` is hard-coded to `true`.
 - Pad shift layers: Pad FX effects I-P, Keyboard mode shift (delete cue, semitone up/down) and Key Shift pad 7/8 (change pitch step).
-- Beat FX: the beat-fraction buttons and shift+BEAT (Auto/Tap mode), which step the effect selector instead, and shift+ON/OFF (Release FX).
+- Beat FX: the beat-fraction buttons and shift+BEAT (Auto/Tap mode), which step the effect selector instead.
 - Merge FX shift functions as described in the manual (shift+press to cancel, shift+turn for sample volume); the same inputs are used for the Mixxx-specific pitch controls above.
 - Fader Start (shift + moving the channel fader or crossfader).
 - CUE/LOOP MEMORY save and delete (the buttons are used for slip mode and keylock), 4-beat auto loop on long press of IN, secondary pad modes and Sample Scratch.

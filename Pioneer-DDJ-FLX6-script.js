@@ -92,6 +92,13 @@ PioneerDDJFLX6.fastSeekScale = 150;
 PioneerDDJFLX6.bendScale = 0.4;
 PioneerDDJFLX6.bendScaleMergeFxKnop = 0.2;
 
+// Release FX (spinback), done with engine.brake() and a negative start rate
+// (engine.spinback() negates the factor, which makes the reverse speed grow).
+// factor = how fast the spinback slows down (about 2.4 s at 1, 1.7 s at 5,
+// 1.3 s at 10, 0.8 s at 30), rate = start speed (negative = reverse)
+PioneerDDJFLX6.spinbackFactor = 5;
+PioneerDDJFLX6.spinbackRate = -10;
+
 PioneerDDJFLX6.tempoRanges = [0.06, 0.10, 0.16, 0.25];
 
 PioneerDDJFLX6.shiftButtonDown = [false, false,false,false];
@@ -514,6 +521,34 @@ PioneerDDJFLX6.beatFxRightPressed = function(_channel, _control, value) {
     if(this.fxSelect == "")
         return;
     engine.setValue(this.fxSelect,"effect_selector",1);
+};
+
+//
+// RELEASE FX (SHIFT + BEAT FX ON/OFF)
+//
+// Spins back the playing decks that are assigned to effect unit 1 with
+// CH SELECT. Releasing the button cancels the spinback.
+//
+
+PioneerDDJFLX6.spinbackDecks = [];
+
+PioneerDDJFLX6.releaseFxPressed = function(_channel, _control, value) {
+    if (value === 0) {
+        PioneerDDJFLX6.spinbackDecks.forEach(function(deck) {
+            engine.brake(deck, false);
+        });
+        PioneerDDJFLX6.spinbackDecks = [];
+        return;
+    }
+
+    for (let deck = 1; deck <= 4; deck++) {
+        const channel = "[Channel" + deck + "]";
+        if (engine.getValue("[EffectRack1_EffectUnit1]", "group_" + channel + "_enable") &&
+                engine.getValue(channel, "play")) {
+            engine.brake(deck, true, PioneerDDJFLX6.spinbackFactor, PioneerDDJFLX6.spinbackRate);
+            PioneerDDJFLX6.spinbackDecks.push(deck);
+        }
+    }
 };
 
 PioneerDDJFLX6.beatFxChannel1 = function(_channel, control, value, _status, group) {
