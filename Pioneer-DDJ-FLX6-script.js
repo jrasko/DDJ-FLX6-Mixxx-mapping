@@ -842,10 +842,6 @@ PioneerDDJFLX6.mergeFxTurn = function(channel, _control, value, _status, group) 
         {
             let superValue = engine.getValue("[QuickEffectRack1_"+newGroup+"]","super1");
             superValue += diff * 0.001;
-            if(diff < 0)
-                diff = 0;
-            if(diff > 1)
-                diff = 1;
             engine.setValue("[QuickEffectRack1_"+newGroup+"]","super1",superValue);
         }
     }
