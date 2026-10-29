@@ -58,43 +58,11 @@ PioneerDDJFLX6.lights = {
             status: 0xB0,
             data1: 0x02,
         },
-        playPause: {
-            status: 0x90,
-            data1: 0x0B,
-        },
-        shiftPlayPause: {
-            status: 0x90,
-            data1: 0x47,
-        },
-        cue: {
-            status: 0x90,
-            data1: 0x0C,
-        },
-        shiftCue: {
-            status: 0x90,
-            data1: 0x48,
-        },
     },
     deck2: {
         vuMeter: {
             status: 0xB1,
             data1: 0x02,
-        },
-        playPause: {
-            status: 0x91,
-            data1: 0x0B,
-        },
-        shiftPlayPause: {
-            status: 0x91,
-            data1: 0x47,
-        },
-        cue: {
-            status: 0x91,
-            data1: 0x0C,
-        },
-        shiftCue: {
-            status: 0x91,
-            data1: 0x48,
         },
     },
 	deck3: {
@@ -113,11 +81,6 @@ PioneerDDJFLX6.lights = {
 
 // Store timer IDs
 PioneerDDJFLX6.timers = {};
-
-// Keep alive timer
-PioneerDDJFLX6.sendKeepAlive = function() {
-    midi.sendSysexMsg([0xF0, 0x00, 0x40, 0x05, 0x00, 0x00, 0x04, 0x05, 0x00, 0x50, 0x02, 0xf7], 12); // This was reverse engineered with Wireshark
-};
 
 // Jog wheel constants
 PioneerDDJFLX6.vinylMode = true;
@@ -282,11 +245,6 @@ PioneerDDJFLX6.init = function() {
         engine.makeConnection("[EffectRack1_EffectUnit1_Effect" + i +"]", "enabled", PioneerDDJFLX6.toggleFxLight);
         engine.makeConnection("[EffectRack1_EffectUnit2_Effect" + i +"]", "enabled", PioneerDDJFLX6.toggleFxLight);
     }
-    
-    //engine.makeConnection("[EffectRack1_EffectUnit1]", "focused_effect", PioneerDDJFLX6.toggleFxLight);
-    
-
-    //PioneerDDJFLX6.keepAliveTimer = engine.beginTimer(200, PioneerDDJFLX6.sendKeepAlive,true);
 
     // query the controller for current control positions on startup
     var ControllerStatusSysex = [0xF0, 0x00, 0x20, 0x7F, 0x03, 0x01, 0xF7];
@@ -356,7 +314,6 @@ PioneerDDJFLX6.vuMeterUpdate = function(value, group) {
 };
 
 PioneerDDJFLX6.fxSelected = function(_channel, _control, value, status, group){
-    console.log("fxSelected group: "+group+" value: "+value);
     if(value === 0x7f)
     {
         var oldValue = 0;
@@ -369,15 +326,9 @@ PioneerDDJFLX6.fxSelected = function(_channel, _control, value, status, group){
         PioneerDDJFLX6.fxSelect = group;
         engine.setValue(group,"enabled",oldValue);
     }
-    else
-    {
-        //engine.setValue(group,"mix",0);
-        //engine.setValue(group,"enabled", 0);
-    }
 };
 
 PioneerDDJFLX6.fxEnabled= function(_channel, _control, value, status, group){
-    console.log("fxEnabled group: "+group+" value: "+value);
     var effects = [
         "[EffectRack1_EffectUnit1_Effect1]",
         "[EffectRack1_EffectUnit1_Effect2]",
@@ -406,7 +357,6 @@ PioneerDDJFLX6.fxEnabled= function(_channel, _control, value, status, group){
                 if(engine.getValue(effects[i],"enabled") > 0)
                     engine.setValue(effects[i],"enabled",0);
             }
-            //PioneerDDJFLX6.fxSelect = "";
         }
         else
         {
@@ -478,8 +428,6 @@ PioneerDDJFLX6.playPositionUpdate = function(value, group){
 //
 
 PioneerDDJFLX6.toggleFxLight = function(value, group, _control) {
-    //const enabled = engine.getValue(PioneerDDJFLX6.focusedFxGroup(), "enabled");
-    console.log("toggleFxLight group: "+group+" fxSelect: "+PioneerDDJFLX6.fxSelect);
     var lightData = null;
     switch(group)
     {
@@ -506,7 +454,6 @@ PioneerDDJFLX6.toggleFxLight = function(value, group, _control) {
         return; 
     var enabled = value >= 0.5;
     PioneerDDJFLX6.toggleLight(lightData, enabled);
-    //PioneerDDJFLX6.toggleLight(PioneerDDJFLX6.lights.shiftBeatFx, enabled);
 };
 
 PioneerDDJFLX6.focusedFxGroup = function() {
@@ -540,22 +487,6 @@ PioneerDDJFLX6.beatFxKnobLSB = function(_channel, _control, value, _status, grou
     }
 };
 
-PioneerDDJFLX6.changeFocusedEffectBy = function(numberOfSteps) {
-    let focusedEffect = engine.getValue("[EffectRack1_EffectUnit1]", "focused_effect");
-
-    // Convert to zero-based index
-    focusedEffect -= 1;
-
-    // Standard Euclidean modulo by use of two plain modulos
-    const numberOfEffectsPerEffectUnit = 3;
-    focusedEffect = (((focusedEffect + numberOfSteps) % numberOfEffectsPerEffectUnit) + numberOfEffectsPerEffectUnit) % numberOfEffectsPerEffectUnit;
-
-    // Convert back to one-based index
-    focusedEffect += 1;
-
-    engine.setValue("[EffectRack1_EffectUnit1]", "focused_effect", focusedEffect);
-};
-
 PioneerDDJFLX6.beatFxSelectPressed = function(_channel, _control, value) {
     if (value === 0) { return; }
 
@@ -571,7 +502,6 @@ PioneerDDJFLX6.beatFxSelectShiftPressed = function(_channel, _control, value) {
 PioneerDDJFLX6.beatFxLeftPressed = function(_channel, _control, value) {
     if (value === 0) { return; }
 
-    //PioneerDDJFLX6.changeFocusedEffectBy(-1);
     if(this.fxSelect == "")
         return;
 
@@ -581,31 +511,9 @@ PioneerDDJFLX6.beatFxLeftPressed = function(_channel, _control, value) {
 PioneerDDJFLX6.beatFxRightPressed = function(_channel, _control, value) {
     if (value === 0) { return; }
 
-    //PioneerDDJFLX6.changeFocusedEffectBy(1);
     if(this.fxSelect == "")
         return;
-    console.log("beatFxRightPressed fxSelected: "+this.fxSelect);
     engine.setValue(this.fxSelect,"effect_selector",1);
-};
-
-PioneerDDJFLX6.beatFxOnOffPressed = function(_channel, _control, value) {
-    if (value === 0) { return; }
-
-    const toggleEnabled = !engine.getValue(PioneerDDJFLX6.focusedFxGroup(), "enabled");
-    engine.setValue(PioneerDDJFLX6.focusedFxGroup(), "enabled", toggleEnabled);
-};
-
-PioneerDDJFLX6.beatFxOnOffShiftPressed = function(_channel, _control, value) {
-    if (value === 0) { return; }
-
-    engine.setParameter("[EffectRack1_EffectUnit1]", "mix", 0);
-    engine.softTakeoverIgnoreNextValue("[EffectRack1_EffectUnit1]", "mix");
-
-    for (let i = 1; i <= 3; i++) {
-        engine.setValue("[EffectRack1_EffectUnit1_Effect" + i + "]", "enabled", 0);
-    }
-    PioneerDDJFLX6.toggleLight(PioneerDDJFLX6.lights.beatFx, false);
-    PioneerDDJFLX6.toggleLight(PioneerDDJFLX6.lights.shiftBeatFx, false);
 };
 
 PioneerDDJFLX6.beatFxChannel1 = function(_channel, control, value, _status, group) {
@@ -895,7 +803,6 @@ PioneerDDJFLX6.mergeFxTurnShift = function(channel, _control, value, _status, gr
         superValue = -12.0;
     if(superValue > 12.0)
         superValue = 12.0;
-    //console.log("adjusting pitch to " + superValue);
     engine.setValue(newGroup,"pitch",superValue);
 
 
@@ -939,7 +846,6 @@ PioneerDDJFLX6.deckControlRPressed = function(channel, _control, value, _status,
 PioneerDDJFLX6.mergeEffectButtonPressed = function(channel, _control, value, _status, group) {
     if(value == 0)
         return;
-    console.log("mergeEffectButtonPressed group: "+group);
     var newGroup = "";
     switch(group)
     {
@@ -1010,9 +916,6 @@ PioneerDDJFLX6.mergeEffectButtonPressedShift = function(channel, _control, value
 };
 
 PioneerDDJFLX6.padFxPressed = function(channel, control, value, status, group){
-    //if(value == 0)
-    //    return;
-    console.log("padFxPressed channel: "+channel+" control: "+control);
     let groupPreset = group.split(";");
     if(groupPreset.length < 2)
         return;
@@ -1039,7 +942,6 @@ PioneerDDJFLX6.padFxPressed = function(channel, control, value, status, group){
     {
         if(enabled)
         {
-            //this.stopMergeFx(side, groupPreset[0]);
             engine.setValue("[QuickEffectRack1_"+groupPreset[0]+"]","loaded_chain_preset",groupPreset[1]);
         }
         else
@@ -1067,7 +969,6 @@ PioneerDDJFLX6.startMergeFx = function(side, group, preset){
 
     engine.setValue("[QuickEffectRack1_"+group+"]","loaded_chain_preset",preset);
     engine.setValue("[QuickEffectRack1_"+group+"]","enabled",1);
-    // midi.sendShortMsg(0xB4,0x10,0x7F);
     this.startLEDBlink(side == "L" ? 0xB4 : 0xB5, 0x10);
     this.mergeFxEnabled[group] = true;
 }
