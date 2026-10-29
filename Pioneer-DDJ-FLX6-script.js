@@ -83,7 +83,6 @@ PioneerDDJFLX6.lights = {
 PioneerDDJFLX6.timers = {};
 
 // Jog wheel constants
-PioneerDDJFLX6.vinylMode = true;
 PioneerDDJFLX6.alpha = 1.0/8;
 PioneerDDJFLX6.beta = PioneerDDJFLX6.alpha/32;
 
@@ -1089,7 +1088,7 @@ PioneerDDJFLX6.jogTouch = function(channel, _control, value) {
         return;
     }
 
-    if (value !== 0 && this.vinylMode) {
+    if (value !== 0) {
         if (PioneerDDJFLX6.scratchReleaseTimers[channel] !== undefined) {
             // touched again while waiting for the wheel to stop: keep scratching
             engine.stopTimer(PioneerDDJFLX6.scratchReleaseTimers[channel]);

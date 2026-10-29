@@ -39,7 +39,7 @@ Mixxx has no Merge FX, Release FX or Serato/rekordbox-only features, so these co
 | Shift + BEAT FX ON/OFF (Release FX)         | Spinback of the playing decks assigned to effect unit 1; releasing cancels it           | Turns Release FX on/off (rekordbox)                |
 
 ## Not mapped
-- Shift+JOG CUTTER (Vinyl mode toggle); `vinylMode` is hard-coded to `true`.
+- JOG CUTTER (Jog Cutter mode) and shift+JOG CUTTER (Vinyl mode toggle). The controller switches Vinyl mode itself: with it on, touching the top of the platter scratches; with it off, the platter only bends the pitch. The mapping needs no binding for it, and no light shows the mode.
 - Pad shift layers: Pad FX effects I-P, Keyboard mode shift (delete cue, semitone up/down) and Key Shift pad 7/8 (change pitch step).
 - Beat FX: the beat-fraction buttons and shift+BEAT (Auto/Tap mode), which step the effect selector instead.
 - Merge FX shift functions as described in the manual (shift+press to cancel, shift+turn for sample volume); the same inputs are used for the Mixxx-specific pitch controls above.
