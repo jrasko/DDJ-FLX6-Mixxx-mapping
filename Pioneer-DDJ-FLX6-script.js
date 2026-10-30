@@ -87,17 +87,16 @@ PioneerDDJFLX6.alpha = 1.0/8;
 PioneerDDJFLX6.beta = PioneerDDJFLX6.alpha/32;
 
 // Scratching is only ended once the wheel has stopped (so a back spin can run out).
-// The wheel counts as moving when a tick arrived within scratchMovingTime ms of
-// the release, and as stopped after scratchStopTime ms without a tick.
+// The wheel counts as stopped after scratchStopTime ms without a tick; if it is
+// already stopped on release, scratching ends at once.
 // scratchMaxReleaseTime is the upper limit for waiting.
-PioneerDDJFLX6.scratchMovingTime = 50;
-PioneerDDJFLX6.scratchStopTime = 100;
+PioneerDDJFLX6.scratchStopTime = 50;
 PioneerDDJFLX6.scratchMaxReleaseTime = 3000;
 PioneerDDJFLX6.jogLastTick = [0, 0, 0, 0];
 PioneerDDJFLX6.scratchReleaseTimers = [undefined, undefined, undefined, undefined];
 
 // Multiplier for fast seek through track using SHIFT+JOGWHEEL
-PioneerDDJFLX6.fastSeekScale = 150;
+PioneerDDJFLX6.fastSeekScale = 50;
 PioneerDDJFLX6.bendScale = 0.4;
 PioneerDDJFLX6.bendScaleMergeFxKnop = 0.2;
 
@@ -1096,7 +1095,7 @@ PioneerDDJFLX6.jogTouch = function(channel, _control, value) {
         } else {
             engine.scratchEnable(deckNum, 720*10, 33+1/3, this.alpha, this.beta);
         }
-    } else if (Date.now() - PioneerDDJFLX6.jogLastTick[channel] < PioneerDDJFLX6.scratchMovingTime) {
+    } else if (Date.now() - PioneerDDJFLX6.jogLastTick[channel] < PioneerDDJFLX6.scratchStopTime) {
         // the wheel is still moving (e.g. a back spin): wait until it has stopped
         PioneerDDJFLX6.waitForWheelStop(channel);
     } else {
